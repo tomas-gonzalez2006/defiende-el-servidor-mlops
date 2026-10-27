@@ -1,5 +1,7 @@
 [core]
     no_scm = True
-    remote = google-drive
+    remote = local-storage
 ['remote "google-drive"']
     url = gdrive://1wSB4-Rfs9BzGggJoOZjRAXsSXIfojBKH
+['remote "local-storage"']
+    url = /home/suleily/dvc-storage

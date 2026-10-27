@@ -1,0 +1,204 @@
+LISTA COMPLETA DE TAREAS
+Taller MLOps: “Defiende el servidor”
+Fecha límite: viernes 30 de octubre de 2026, 11:59 p. m. (hora de Bogotá)
+
+1. PREPARACIÓN DEL PROYECTO
+[ ] Crear el repositorio de código en GitHub.
+[ ] Definir la estructura del proyecto: src/, configs/, evidencias/ y README.md.
+[ ] Configurar Python y fijar las dependencias en requirements.txt o un lockfile equivalente.
+[ ] Configurar Git, DVC, MLflow y Hugging Face Hub.
+[ ] Registrar el grupo de clase y los integrantes.
+
+2. DESCARGAR Y AUDITAR LOS DATOS
+[ ] Descargar UNSW_NB15_training-set.csv (175.341 filas).
+[ ] Descargar UNSW_NB15_testing-set.csv (82.332 filas).
+[ ] Registrar la fuente y la fecha de descarga de cada archivo.
+[ ] Calcular el hash SHA-256 de cada archivo.
+[ ] Registrar filas, columnas, clases, valores faltantes y tipos de datos.
+[ ] Comprobar que los archivos descargados son las particiones correctas; no confiar solo en sus nombres.
+[ ] Contar duplicados por variables predictoras, sin identificadores ni etiquetas.
+[ ] Detectar entradas idénticas con etiquetas contradictorias y documentar la política aplicada.
+[ ] Usar label como objetivo: 0 = normal y 1 = ataque.
+[ ] Excluir label, attack_cat e id de las variables de entrada del modelo.
+[ ] Conservar los identificadores solo para auditoría y relacionar predicciones.
+[ ] Crear entrenamiento y validación únicamente a partir del archivo de entrenamiento.
+[ ] Evitar que entradas predictoras idénticas queden repartidas entre entrenamiento y validación.
+[ ] Guardar una semilla y una asignación reproducible de las filas.
+[ ] Mantener fijas las particiones para los cuatro experimentos.
+[ ] Ajustar imputación, codificación, escalado y selección de variables solo con entrenamiento.
+[ ] Crear una solución completa que incluya preprocesamiento y estimador, y que pueda guardarse y cargarse.
+[ ] Auditar el esquema, duplicados y cruces del archivo de test sin usar sus etiquetas o métricas para seleccionar modelos o umbrales.
+[ ] Reportar el solapamiento entre entrenamiento, validación y test, y limitar las conclusiones.
+[ ] Versionar con DVC los datos recibidos originales.
+[ ] Versionar con DVC los datos preparados y sus particiones.
+[ ] Documentar las transformaciones realizadas.
+[ ] Configurar un almacenamiento DVC que permita recuperar los datos sin depender de la caché original ni de un remote únicamente local.
+[ ] Si se usa una muestra reproducible de entrenamiento por límites de CPU, justificar su tamaño y usar la misma comparación de datos en todos los experimentos.
+[ ] Evaluar el modelo final sobre toda la partición publicada de test; no eliminar filas del test.
+
+3. ENTRENAR Y COMPARAR CUATRO EXPERIMENTOS
+[ ] Elegir al menos dos familias de modelos (por ejemplo, regresión logística y árboles).
+[ ] Crear una configuración de referencia sencilla.
+[ ] Entrenar al menos cuatro configuraciones diferentes en total.
+[ ] Asegurarse de que las configuraciones no sean simplemente cuatro cambios de semilla.
+[ ] Escribir una hipótesis para cada ejecución.
+[ ] Identificar qué cambia en cada experimento.
+[ ] Registrar en MLflow los parámetros de cada ejecución.
+[ ] Registrar en MLflow la semilla, hipótesis, versión de datos y commit de código.
+[ ] Registrar en MLflow las métricas de validación y el artefacto del modelo completo.
+[ ] Conservar los run ID de las cuatro ejecuciones.
+[ ] Calcular recall de ataque.
+[ ] Calcular precision de ataque.
+[ ] Calcular tasa de falsos positivos (FPR).
+[ ] Calcular macro-F1.
+[ ] Generar la matriz de confusión.
+[ ] Definir cómo se manejan los denominadores iguales a cero.
+[ ] Tratar ataque como la clase positiva.
+[ ] Exportar una tabla de comparación de experimentos.
+[ ] Exportar los registros de MLflow en un formato consultable, no solo capturas.
+[ ] Interpretar los errores y comparar los resultados de validación.
+
+4. CREAR LAS DOS VERSIONES DEL MODELO
+[ ] Crear v1: solución funcional con preprocesamiento, modelo, umbral y métricas de validación identificados.
+[ ] Guardar v1 en un commit de Git identificable.
+[ ] Definir un cambio real para v2 basado en los experimentos.
+[ ] Crear v2 cambiando de forma justificada el modelo, los hiperparámetros, el preprocesamiento o el umbral.
+[ ] Guardar v2 en un commit de Git identificable y distinto al de v1.
+[ ] Comparar v1 y v2 con validación.
+[ ] Explicar qué mejora, qué empeora y qué errores se aceptan.
+[ ] Elegir el modelo y el umbral final de v2 exclusivamente con validación.
+[ ] Registrar y congelar la decisión antes de evaluar test.
+[ ] No es obligatorio evaluar v1 en test; la comparación v1/v2 se realiza con validación.
+
+5. PUBLICAR LOS MODELOS EN HUGGING FACE HUB
+[ ] Crear un repositorio de modelos en Hugging Face Hub.
+[ ] Publicar v1 como una revisión identificada por su SHA completo.
+[ ] Publicar v2 como una revisión identificada por su SHA completo.
+[ ] Incluir en cada revisión el modelo completo y su preprocesamiento.
+[ ] Incluir configuración, umbral y dependencias.
+[ ] Crear una model card para v1.
+[ ] Crear una model card para v2.
+[ ] Documentar en cada model card el propósito, los datos, las métricas de validación, las limitaciones, las instrucciones de uso y las referencias.
+[ ] Vincular cada versión con el commit de código, la versión DVC y el run ID de MLflow.
+[ ] Comprobar que ambas revisiones se pueden descargar usando sus SHA completos.
+[ ] Se pueden añadir tags v1 y v2 para facilitar la lectura, pero no sustituyen los SHA.
+
+6. EVALUAR LA VERSIÓN FINAL EN TEST
+[x] Evaluar una sola vez la solución v2 congelada sobre el test completo.
+[x] No usar las etiquetas ni las métricas de test para elegir el modelo o el umbral.
+[x] Calcular las métricas finales y la matriz de confusión.
+[x] Guardar metricas-test.json.
+[x] Incluir en metricas-test.json la versión y hash del modelo, hash del dataset, número de filas, umbral, clase positiva, matriz de confusión y métricas.
+[x] Generar predicciones-test.csv con una fila por registro del test.
+[x] Incluir las columnas row_id, y_true, score_attack y y_pred.
+[x] Asegurar que row_id identifique inequívocamente el archivo y la fila.
+[x] Documentar si score_attack es probabilidad o puntuación y la regla aplicada al umbral.
+[x] Conservar el SHA de la revisión evaluada y el hash del artefacto del modelo.
+[x] Añadir el resultado final a la documentación sin cambiar el modelo congelado.
+[ ] Explicar el posible solapamiento entre particiones y las limitaciones del dataset histórico.
+
+7. REALIZAR LA PRUEBA OBLIGATORIA DE RECUPERACIÓN
+[ ] Crear una carpeta y un entorno nuevos.
+[ ] No reutilizar las cachés de datos o modelos de la ejecución original.
+[ ] Obtener la revisión de código elegida e instalar las dependencias fijadas.
+[ ] Recuperar con DVC los datos originales y preparados desde el almacenamiento entregado.
+[ ] Verificar que las huellas/hash de los datos recuperados coinciden.
+[ ] Descargar v1 de Hugging Face usando su SHA completo.
+[ ] Cargar de v1 el preprocesamiento, el modelo y el umbral.
+[ ] Descargar v2 de Hugging Face usando su SHA completo.
+[ ] Cargar de v2 el preprocesamiento, el modelo y el umbral.
+[ ] Seleccionar al menos 20 filas fijas de validación.
+[ ] Generar predicciones de v1 sobre las mismas filas.
+[ ] Generar predicciones de v2 sobre las mismas filas.
+[ ] Guardar las salidas antes y después de recuperar ambas versiones.
+[ ] Comprobar que las predicciones recuperadas coinciden con las originales para cada versión.
+[ ] Si se comparan probabilidades, declarar una tolerancia numérica razonable y registrar la diferencia máxima.
+[ ] Guardar entradas, salidas, hashes, comandos reales, logs y resultado de la comparación en evidencias/recuperacion/.
+[ ] Incluir código e instrucciones para reproducir al menos un experimento; no es necesario reentrenar todo para demostrar recuperación.
+
+8. CREAR LAS EVIDENCIAS OBLIGATORIAS
+[ ] Crear evidencias/auditoria.json con fuentes, hashes, dimensiones, clases, faltantes, duplicados, contradicciones, limpieza, variables incluidas/excluidas, semilla, tamaños y hashes de particiones y cruces.
+[ ] Crear evidencias/experimentos.csv con una fila por configuración.
+[ ] Incluir en experimentos.csv ID, hipótesis, familia, parámetros o ruta, semilla, commit Git, referencia DVC, run ID, recall, precision, FPR, macro-F1, umbral y conclusión de validación.
+[ ] Crear evidencias/seleccion.json con versión elegida, run ID, referencias Git/DVC/Hugging Face, hash del modelo, umbral, razón de selección y evidencia de congelación anterior al test.
+[ ] Crear evidencias/metricas-test.json con la evaluación final.
+[ ] Crear evidencias/predicciones-test.csv con las predicciones de todos los registros del test.
+[ ] Exportar los registros, parámetros, métricas, metadatos y artefactos relevantes de MLflow en evidencias/mlflow/.
+[ ] Guardar en evidencias/recuperacion/ las entradas fijas de validación, salidas de v1/v2 antes y después de recuperar, hashes, comandos, logs, comparación y resultado.
+[ ] Usar CSV y JSON válidos, sin celdas combinadas ni números guardados como imágenes.
+[ ] Asegurar que todas las evidencias coincidan entre sí y con los artefactos reales.
+
+9. DOCUMENTAR EL PROYECTO
+[ ] Crear o completar README.md.
+[ ] Indicar la versión de Python y las dependencias fijadas.
+[ ] Documentar instalación y configuración.
+[ ] Documentar cómo recuperar los datos con DVC.
+[ ] Documentar cómo ejecutar un experimento.
+[ ] Documentar cómo descargar v1 y v2 por SHA.
+[ ] Documentar cómo cargar cada modelo y generar predicciones.
+[ ] Proporcionar comandos copiables, sin rutas personales que otra persona deba editar.
+[ ] Crear entrega.md como índice de la entrega.
+[ ] Incluir integrantes y grupo, URL de GitHub y commit final completo.
+[ ] Para v1 y v2, incluir commit de código, referencia DVC, run ID de MLflow, repositorio y SHA de Hugging Face, hash del modelo y umbral.
+[ ] Indicar la ubicación del almacenamiento DVC y las instrucciones de acceso.
+[ ] Incluir comandos de instalación, recuperación, entrenamiento y predicción.
+[ ] Registrar tiempo y recursos medidos en el equipo.
+[ ] Documentar limitaciones conocidas.
+[ ] Declarar el uso de IA, código externo y sus licencias cuando corresponda.
+[ ] Explicar la contribución de cada integrante.
+[ ] Verificar que el modelo descrito, descargado y usado para predecir es el mismo artefacto, vinculado por identificadores y hashes.
+
+10. REDACTAR EL INFORME PDF
+[ ] Preparar un informe de máximo cinco páginas, sin contar referencias.
+[ ] Explicar los datos y la limpieza.
+[ ] Resumir y comparar los cuatro experimentos.
+[ ] Explicar los cambios entre v1 y v2.
+[ ] Justificar la elección del modelo y del umbral.
+[ ] Presentar el resultado de la evaluación final en test.
+[ ] Describir las limitaciones.
+[ ] Usar tablas y cifras coherentes con los archivos de evidencia.
+
+11. PREPARAR EL ZIP FINAL
+[ ] Incluir README.md.
+[ ] Incluir entrega.md.
+[ ] Incluir requirements.txt o lockfile equivalente.
+[ ] Incluir src/ y configs/.
+[ ] Incluir .dvc/config, archivos .dvc y .dvcignore.
+[ ] Incluir las evidencias obligatorias.
+[ ] Incluir dvc.yaml y dvc.lock solo si se utiliza un pipeline DVC.
+[ ] No incluir entornos virtuales.
+[ ] No incluir cachés.
+[ ] No incluir tokens, contraseñas ni credenciales.
+[ ] No incluir copias masivas del dataset dentro del ZIP.
+[ ] Si se entrega un respaldo del almacenamiento DVC, separarlo del ZIP de código y explicar cómo utilizarlo como remote.
+
+12. VERIFICACIÓN Y ENVÍO
+[ ] Comprobar que se puede recuperar el código de v1 y v2.
+[ ] Comprobar que DVC recupera los datos originales y preparados sin depender de la caché original.
+[ ] Comprobar que los cuatro experimentos usan las mismas particiones y tienen run ID consultable.
+[ ] Comprobar que Hugging Face contiene dos soluciones completas, con SHA y model cards.
+[ ] Comprobar que la prueba de recuperación reproduce las salidas de ambas versiones con las mismas entradas.
+[ ] Comprobar que el test no se usó para decidir el modelo y que las predicciones y métricas se pueden recalcular.
+[ ] Comprobar los permisos de lectura del docente para GitHub, Hugging Face y el almacenamiento DVC.
+[ ] No compartir tokens ni contraseñas.
+[ ] Preparar un único envío por el hilo del taller en Teams o por correo institucional; no enviar por ambos canales.
+[ ] Incluir el ZIP, el informe PDF y los enlaces de revisión.
+[ ] Usar como asunto o primera línea: “MLOps — Defiende el servidor — Grupo A/B — Integrantes”.
+[ ] En el mensaje, incluir nombres completos, grupo, URL del repositorio de código, commit final completo, URL del repositorio de modelos, SHA de v1 y v2, y ubicación y forma de acceso al almacenamiento DVC.
+[ ] Si los adjuntos superan el límite del canal, compartir una carpeta descargable con los mismos archivos y acceso de lectura.
+[ ] Enviar antes del viernes 30 de octubre de 2026 a las 11:59 p. m. (hora de Bogotá).
+
+RECORDATORIOS IMPORTANTES
+- El objetivo es clasificar conexiones normales (label = 0) y ataques (label = 1).
+- No incluir label, attack_cat ni id como entradas del modelo.
+- No ajustar transformaciones con datos de validación o test.
+- No repartir entradas predictoras idénticas entre entrenamiento y validación.
+- No utilizar el test para elegir modelo ni umbral.
+- La comparación de v1 y v2 se realiza con validación.
+- El test final debe incluir toda la partición publicada.
+- El ZIP por sí solo no demuestra el historial de Git.
+- Ejecutar dvc add no basta: los datos deben poder recuperarse desde el almacenamiento entregado.
+- Subir modelos a Hugging Face no basta: hay que probar su recuperación por SHA.
+- No se exige una accuracy mínima ni mejorar todas las métricas.
+- No se exige video, aplicación web, API, Space, servicio de pago ni servidor encendido.
+- Se permite usar asistentes de IA, pero se debe declarar cómo se utilizaron y qué se verificó.
