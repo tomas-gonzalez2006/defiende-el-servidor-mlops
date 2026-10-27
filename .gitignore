@@ -1,0 +1,8 @@
+.dvc/cache/
+.dvc/tmp/
+data/raw/
+data/processed/
+__pycache__/
+mlruns/
+Defiende-el-servidor-taller-evaluable-2026-10-16.pdf
+Defiende-el-servidor-taller-evaluable-2026-10-16-1_1.png

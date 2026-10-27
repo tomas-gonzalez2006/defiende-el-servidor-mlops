@@ -1,0 +1,30 @@
+{
+  "run_id": "a69ffd0159e04ee0a64cc0842d26d9b7",
+  "model": "logistic_regression_c_0_1",
+  "hypothesis": "La regresión logística con regularización más fuerte ofrece una referencia lineal estable.",
+  "positive_class": 1,
+  "threshold_rule": "predict attack if P(label=1) >= 0.5",
+  "confusion_matrix_labels_0_1": [
+    [
+      9083,
+      2040
+    ],
+    [
+      277,
+      23796
+    ]
+  ],
+  "metrics": {
+    "attack_recall": 0.9884933327794625,
+    "attack_precision": 0.9210404087320019,
+    "false_positive_rate": 0.18340375797896252,
+    "macro_f1": 0.9202286559233455,
+    "threshold": 0.5,
+    "validation_rows": 35196,
+    "confusion_tn": 9083,
+    "confusion_fp": 2040,
+    "confusion_fn": 277,
+    "confusion_tp": 23796
+  },
+  "denominator_policy": "Precision/recall/F1 use zero_division=0; FPR=0 when there are no negative validation examples."
+}

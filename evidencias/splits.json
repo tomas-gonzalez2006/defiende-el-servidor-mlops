@@ -1,0 +1,80 @@
+{
+  "source_file": "data\\raw\\UNSW_NB15_training-set.csv",
+  "source_sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+  "seed": 42,
+  "method": "GroupShuffleSplit",
+  "validation_fraction_requested": 0.2,
+  "group_columns": [
+    "dur",
+    "proto",
+    "service",
+    "state",
+    "spkts",
+    "dpkts",
+    "sbytes",
+    "dbytes",
+    "rate",
+    "sttl",
+    "dttl",
+    "sload",
+    "dload",
+    "sloss",
+    "dloss",
+    "sinpkt",
+    "dinpkt",
+    "sjit",
+    "djit",
+    "swin",
+    "stcpb",
+    "dtcpb",
+    "dwin",
+    "tcprtt",
+    "synack",
+    "ackdat",
+    "smean",
+    "dmean",
+    "trans_depth",
+    "response_body_len",
+    "ct_srv_src",
+    "ct_state_ttl",
+    "ct_dst_ltm",
+    "ct_src_dport_ltm",
+    "ct_dst_sport_ltm",
+    "ct_dst_src_ltm",
+    "is_ftp_login",
+    "ct_ftp_cmd",
+    "ct_flw_http_mthd",
+    "ct_src_ltm",
+    "ct_srv_dst",
+    "is_sm_ips_ports"
+  ],
+  "group_definition": "Exact predictor-row hash; excludes id, label, and attack_cat.",
+  "contradictory_label_policy": "Retain every source row and its label; keep identical-predictor rows together in the same split.",
+  "target": "label",
+  "features_excluded_from_model": [
+    "attack_cat",
+    "id",
+    "label"
+  ],
+  "train": {
+    "rows": 140145,
+    "groups": 80832,
+    "label_counts": {
+      "0": 44877,
+      "1": 95268
+    },
+    "csv_sha256": "ea7666a6d07d510e62f887f7c6df0f34e3c657dd81c8965274bd34fc8ee157d4"
+  },
+  "validation": {
+    "rows": 35196,
+    "groups": 20208,
+    "label_counts": {
+      "0": 11123,
+      "1": 24073
+    },
+    "csv_sha256": "7057393f52d154639f26b020d61b88ce6cd71462958cfe7e976d32d0c7960951"
+  },
+  "assignment_csv_sha256": "3dbaf46ddb057d6b0d8ee2007adb0ba4584a4f60ff25d7a3ec44d4f80a32f214",
+  "overlapping_predictor_groups": 0,
+  "test_data_used": false
+}
