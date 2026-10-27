@@ -1,0 +1,10 @@
+Recovery root: /tmp/defiende-recuperacion.tx9394
+1. git archive --format=tar HEAD | tar -xf - -C <recovery-root>
+2. python3 -m venv .venv
+3. .venv/bin/pip install -r requirements.txt 'dvc[gdrive]'
+4. .venv/bin/dvc remote add -d recovery-local /home/suleily/dvc-storage
+5. .venv/bin/dvc pull
+6. .venv/bin/hf download suliely/defiende-el-servidor-modelos --revision 0341d2427932e8293296dc53532ace2eee14f59d --include complete_pipeline.joblib
+7. .venv/bin/hf download suliely/defiende-el-servidor-modelos --revision b37867214a623bce29e946306e2d3e371cb45551 --include complete_pipeline.joblib
+8. Predict first 20 rows of data/processed/validation.csv with threshold 0.5.
+Note: this technical recovery used the available local DVC remote because Google Drive OAuth was blocked; the shared remote recovery remains pending.

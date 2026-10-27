@@ -1,0 +1,15 @@
+{
+  "rows_compared": 20,
+  "versions": {
+    "v1": {
+      "predictions_match": true,
+      "max_score_abs_diff": 0.0,
+      "model_hash_match": true
+    },
+    "v2": {
+      "predictions_match": true,
+      "max_score_abs_diff": 4.440892098500626e-16,
+      "model_hash_match": true
+    }
+  }
+}
