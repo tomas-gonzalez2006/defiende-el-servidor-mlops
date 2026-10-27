@@ -47,6 +47,9 @@ en una carpeta y configúrala como remote local con `dvc remote add -d backup
 /ruta/al/remote`; después ejecuta `dvc pull`. Este respaldo no sustituye un
 remote compartido accesible por el docente.
 
+La guía operativa para el respaldo ZIP es `DVC_BACKUP.md`; su SHA-256 es
+`b822858c47c150dfb9a9dbd3f6ab7874756875324576b92a11ce20abad4f3960`.
+
 ## Resultados finales
 
 La evaluación de v2 usó las 82.332 filas del test completo y está documentada

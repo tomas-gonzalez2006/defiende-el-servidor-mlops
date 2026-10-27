@@ -112,3 +112,4 @@ El pipeline se carga con `joblib.load` y produce `score_attack` con
 - Evaluación final: `evidencias/metricas-test.json` y `evidencias/predicciones-test.csv`.
 - Prueba de recuperación: `evidencias/recuperacion/`.
 - Código de evaluación: `scripts/evaluar_test.py`.
+- Guía del respaldo DVC: `DVC_BACKUP.md`.

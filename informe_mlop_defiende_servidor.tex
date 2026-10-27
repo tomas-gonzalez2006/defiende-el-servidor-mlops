@@ -43,6 +43,8 @@ Bosque, 100 árboles & 0,9827 & 0,9471 & 0,1189 & 0,9415\\
 
 Los cuatro run ID y matrices de confusión están en `evidencias/experimentos.csv` y `evidencias/mlflow/`. El bosque aleatorio obtiene el mayor Macro-F1 y una precisión alta; el árbol tiene el menor FPR, pero menor recall y Macro-F1.
 
+Recall mide la proporción de ataques detectados; precision, la proporción de predicciones de ataque que realmente son ataques; FPR, la proporción de conexiones normales marcadas erróneamente como ataque; y Macro-F1, el promedio del F1 de ambas clases. Estas métricas hacen visible el costo operativo de las falsas alarmas, que no queda reflejado en una sola accuracy.
+
 \section{v1, v2 y decisión}
 v1 es la regresión logística $C=1$, umbral 0,5, commit `0b3cd416...`, run `d5c932d1de7342a59fb754c384d9295d`. v2 cambia de familia al bosque aleatorio de 100 árboles, profundidad 20 y mínimo 10 observaciones por hoja; commit `6428eb9...`, run `423880e8c50744af8f47f60a5736a423`.
 
@@ -71,6 +73,8 @@ v1 y v2 se descargaron por SHA completo desde Hugging Face y se probaron sobre 2
 El remote DVC operativo es local (`/home/suleily/dvc-storage`); Google Drive no aceptó la cuenta de servicio en ``Mi unidad'' por falta de cuota. Por tanto, falta sustituirlo por un remote compartido autorizado y repetir la recuperación desde ese almacenamiento. También deben confirmarse permisos de lectura del docente y enviar un único mensaje por el canal del curso.
 
 El código, evidencias, ZIP e instrucciones están en el repositorio de GitHub: \url{https://github.com/tomas-gonzalez2006/defiende-el-servidor-mlops}. Los modelos están en \url{https://huggingface.co/suliely/defiende-el-servidor-modelos}. El uso de IA y las contribuciones están declarados en `entrega.md`.
+
+El respaldo `dvc-backup-20261027.zip` y `DVC_BACKUP.md` permiten trasladar los objetos DVC manualmente. Es una solución de contingencia: el cierre formal requiere un remote servido por red y una prueba de recuperación con permisos de lectura del docente.
 
 \section*{Referencias}
 UNSW-NB15: \url{https://research.unsw.edu.au/projects/unsw-nb15-dataset}. Evidencias principales: `auditoria.json`, `experimentos.csv`, `seleccion.json`, `metricas-test.json` y `predicciones-test.csv`.
