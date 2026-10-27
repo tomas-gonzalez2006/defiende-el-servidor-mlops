@@ -1,5 +1,11 @@
 # MLOps — Defiende el servidor
 
+## Grupo
+
+- Grupo: Visualización 2 de 2-4
+- Suleily Estefania Moreno Contreras
+- Tomás Alejandro González Forero
+
 ## Particiones reproducibles y experimentos
 
 Los datos originales están en `data/raw/` y los artefactos de la partición en
