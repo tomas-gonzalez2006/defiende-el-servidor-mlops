@@ -16,12 +16,19 @@ y `attack_cat`) antes de asignar el 20 % de grupos a validación; semilla fija:
 en un mismo split. La asignación exacta por fila está en
 `data/processed/split_assignment.csv`.
 
-Instala las dependencias con `python -m pip install -r requirements.txt` y
-ejecuta:
+El proyecto fue verificado con Python 3.14.4. Instala las dependencias con:
 
-```powershell
-python scripts\crear_splits.py
-python scripts\entrenar_experimentos.py
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Para regenerar la partición y ejecutar los cuatro experimentos:
+
+```bash
+python scripts/crear_splits.py
+python scripts/entrenar_experimentos.py
 ```
 
 Las referencias `data\raw.dvc` y `data\processed.dvc` y la caché DVC local ya
@@ -61,13 +68,47 @@ se convierte a `y_pred` con umbral 0.5.
 
 ## DVC remote
 
-Este workspace no tiene Git disponible y está montado desde WSL como ruta UNC.
-Las referencias DVC se generaron con `--no-scm`; la caché local se incluye en
-`.dvc/cache/`. El DVC para Windows no pudo adquirir su bloqueo en esta ruta UNC,
-así que ejecuta operaciones DVC desde WSL nativo o mueve el proyecto a una ruta
-local de Windows. Los datos no se han enviado a un remote.
+Las referencias DVC se generaron con `--no-scm`. El remote compartido de Google
+Drive está configurado en `.dvc/config`, pero la cuenta personal no puede usar
+la cuota de una cuenta de servicio en `Mi unidad`. El remote operativo actual es
+`local-storage`, en `/home/suleily/dvc-storage`, solo como respaldo temporal de
+este equipo.
 
-Para que otra persona pueda recuperarlos, inicializa/controla el proyecto con
-Git, configura un remote DVC compartido, autorizado y accesible por el
-equipo/docente, y ejecuta `dvc push`. No se configura un destino de
-almacenamiento sin confirmar su ubicación y permisos.
+Para recuperar los datos desde el remote actualmente disponible:
+
+```bash
+source .venv/bin/activate
+dvc pull
+```
+
+Antes de la entrega, sustituye el remote local por un almacenamiento compartido
+autorizado para que otra persona pueda recuperar los datos sin depender de este
+equipo. No se deben publicar tokens ni archivos JSON de credenciales.
+
+## Modelos y predicción
+
+Las versiones publicadas están en Hugging Face:
+
+- [v1 — regresión logística](https://huggingface.co/suliely/defiende-el-servidor-modelos/tree/v1)
+- [v2 — bosque aleatorio](https://huggingface.co/suliely/defiende-el-servidor-modelos/tree/v2)
+
+Cada revisión contiene el pipeline completo, incluido el preprocesamiento. Para
+descargar v2 por su SHA completo:
+
+```bash
+hf download suliely/defiende-el-servidor-modelos \
+  --revision b37867214a623bce29e946306e2d3e371cb45551 \
+  --repo-type model --local-dir modelos/v2
+```
+
+El pipeline se carga con `joblib.load` y produce `score_attack` con
+`predict_proba`; la clase ataque es 1 y se aplica el umbral 0.5.
+
+## Evidencias y recuperación
+
+- Auditoría consolidada: `evidencias/auditoria.json`.
+- Comparación de experimentos: `evidencias/experimentos.csv`.
+- Selección v1/v2: `evidencias/seleccion.json`.
+- Evaluación final: `evidencias/metricas-test.json` y `evidencias/predicciones-test.csv`.
+- Prueba de recuperación: `evidencias/recuperacion/`.
+- Código de evaluación: `scripts/evaluar_test.py`.
