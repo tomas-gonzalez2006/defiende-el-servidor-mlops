@@ -10,7 +10,7 @@
 
 - Código: https://github.com/tomas-gonzalez2006/defiende-el-servidor-mlops
 - Modelos: https://huggingface.co/suliely/defiende-el-servidor-modelos
-- Commit final de código: `cab7ef833cff5d5a22fb324ed49fbca10f6e3baa`
+- Commit final de código: `6caa8e6` (documentación); commit completo anterior verificable: `cab7ef833cff5d5a22fb324ed49fbca10f6e3baa`.
 
 ## Versiones de modelo
 
