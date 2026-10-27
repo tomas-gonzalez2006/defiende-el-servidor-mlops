@@ -51,6 +51,14 @@ mlflow ui --backend-store-uri $env:MLFLOW_TRACKING_URI --host 127.0.0.1 --port 5
 Luego abre <http://127.0.0.1:5000>. La interfaz es local a la máquina y no
 está publicada en internet.
 
+## Evaluación final
+
+La versión congelada v2 se evaluó una sola vez sobre las 82.332 filas del test
+completo. Los resultados están en `evidencias/metricas-test.json` y las
+predicciones en `evidencias/predicciones-test.csv`. El script reproducible es
+`scripts/evaluar_test.py`; `score_attack` es la probabilidad de la clase 1 y
+se convierte a `y_pred` con umbral 0.5.
+
 ## DVC remote
 
 Este workspace no tiene Git disponible y está montado desde WSL como ruta UNC.

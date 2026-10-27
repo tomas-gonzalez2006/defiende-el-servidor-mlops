@@ -1,0 +1,36 @@
+{
+  "model_version": "v2",
+  "model_name": "random_forest_100",
+  "model_commit": "6428eb9abe8adfd9d9a19cd4df1eec7f4aa2737c",
+  "mlflow_run_id": "423880e8c50744af8f47f60a5736a423",
+  "model_sha256": "ae10f2c351b3740b5c0ab8a43380f666b93eef4e4ce66b060e82e38a26f8665f",
+  "dataset_file": "data/raw/UNSW_NB15_testing-set.csv",
+  "dataset_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+  "rows": 82332,
+  "threshold": 0.5,
+  "score_attack_definition": "predict_proba column for class 1 (attack)",
+  "positive_class": 1,
+  "metrics": {
+    "attack_recall": 0.9921247683755404,
+    "attack_precision": 0.7958627523844916,
+    "false_positive_rate": 0.3117837837837838,
+    "macro_f1": 0.8469532699452136
+  },
+  "confusion_matrix_labels_0_1": [
+    [
+      25464,
+      11536
+    ],
+    [
+      357,
+      44975
+    ]
+  ],
+  "prediction_columns": [
+    "row_id",
+    "y_true",
+    "score_attack",
+    "y_pred"
+  ],
+  "test_used_for_model_selection": false
+}
