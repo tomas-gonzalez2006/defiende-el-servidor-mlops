@@ -9,6 +9,9 @@
     "attack_recall": 0.9869978814439413,
     "attack_precision": 0.9243697478991597,
     "false_positive_rate": 0.17477299289759957
+    ,"huggingface_repo": "suliely/defiende-el-servidor-modelos"
+    ,"huggingface_revision": "0341d2427932e8293296dc53532ace2eee14f59d"
+    ,"model_sha256": "b7b932bf4d40d7ab55e40c7326a08e578d2ec1231e4e308d83081fef1dd0e645"
   },
   "v2": {
     "name": "random_forest_100",
@@ -19,6 +22,9 @@
     "attack_recall": 0.9826776886968803,
     "attack_precision": 0.9470734246136601,
     "false_positive_rate": 0.11885282747460217
+    ,"huggingface_repo": "suliely/defiende-el-servidor-modelos"
+    ,"huggingface_revision": "b37867214a623bce29e946306e2d3e371cb45551"
+    ,"model_sha256": "ae10f2c351b3740b5c0ab8a43380f666b93eef4e4ce66b060e82e38a26f8665f"
   },
   "decision": "Elegir v2 porque mejora Macro-F1 de 0.9226 a 0.9415, precision de ataque y FPR frente a v1. Se acepta una reducción de recall de 0.9870 a 0.9827.",
   "test_evaluation": "not_yet_performed",
