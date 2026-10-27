@@ -1,0 +1,28 @@
+{
+  "selection_stage": "validation_only_before_test",
+  "v1": {
+    "name": "logistic_regression_c_1",
+    "run_id": "d5c932d1de7342a59fb754c384d9295d",
+    "model_artifact": "evidencias/mlflow/d5c932d1de7342a59fb754c384d9295d/complete_pipeline.joblib",
+    "threshold": 0.5,
+    "macro_f1": 0.9225871938932528,
+    "attack_recall": 0.9869978814439413,
+    "attack_precision": 0.9243697478991597,
+    "false_positive_rate": 0.17477299289759957
+  },
+  "v2": {
+    "name": "random_forest_100",
+    "run_id": "423880e8c50744af8f47f60a5736a423",
+    "model_artifact": "evidencias/mlflow/423880e8c50744af8f47f60a5736a423/complete_pipeline.joblib",
+    "threshold": 0.5,
+    "macro_f1": 0.9415303815941589,
+    "attack_recall": 0.9826776886968803,
+    "attack_precision": 0.9470734246136601,
+    "false_positive_rate": 0.11885282747460217
+  },
+  "decision": "Elegir v2 porque mejora Macro-F1 de 0.9226 a 0.9415, precision de ataque y FPR frente a v1. Se acepta una reducción de recall de 0.9870 a 0.9827.",
+  "test_evaluation": "not_yet_performed",
+  "data_split": "evidencias/splits.json",
+  "data_train_sha256": "ccf081fecaf4b1840e9506ecd21616845d0ed76167fb2758672d489b9ebf43c1",
+  "data_validation_sha256": "3d616f858aa9a3991838cbffb6d1fe3d404fe65d75f00846a8fc56f3e0ed61e0"
+}
