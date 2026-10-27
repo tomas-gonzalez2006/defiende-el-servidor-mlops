@@ -16,6 +16,8 @@
 1. Sustituir `/home/suleily/dvc-storage` por un remote DVC compartido y repetir
    `dvc pull` en un entorno limpio desde ese almacenamiento. Google Drive en
    ``Mi unidad'' rechazó la cuenta de servicio por falta de cuota.
+   Se dejó un respaldo separado `dvc-backup-20261027.tar.gz` de 22 MB, con
+   SHA-256 `c0672d381f25619b089b18cc0ed1a05fc623070980a8ae7051ac8930edb2b3a2`.
 2. Confirmar permisos de lectura del docente en GitHub, Hugging Face y el
    almacenamiento DVC compartido.
 3. Enviar un único mensaje por Teams o correo institucional, con el ZIP, PDF,

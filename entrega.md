@@ -41,6 +41,12 @@ configuración de Google Drive queda pendiente de un almacenamiento con cuota
 para cuentas de servicio o de otro remote compartido autorizado. Esta
 limitación está documentada en `evidencias/recuperacion/comandos.log`.
 
+Como respaldo separado se generó `dvc-backup-20261027.tar.gz` fuera del ZIP de
+código. Para usar un respaldo equivalente en otro equipo, extrae su contenido
+en una carpeta y configúrala como remote local con `dvc remote add -d backup
+/ruta/al/remote`; después ejecuta `dvc pull`. Este respaldo no sustituye un
+remote compartido accesible por el docente.
+
 ## Resultados finales
 
 La evaluación de v2 usó las 82.332 filas del test completo y está documentada
