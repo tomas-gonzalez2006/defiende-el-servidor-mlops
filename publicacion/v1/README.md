@@ -35,6 +35,7 @@ y_pred = (score_attack >= 0.5).astype(int)
 - Commit de código: `0b3cd416fecbc28e984ae2ebfa15f75050da497e`
 - Run MLflow: `d5c932d1de7342a59fb754c384d9295d`
 - Datos: UNSW-NB15, partición de entrenamiento y validación reproducible con semilla 42.
+- Referencia DVC: `data/raw.dvc` y `data/processed.dvc` del commit de código.
 
 ## Limitaciones
 

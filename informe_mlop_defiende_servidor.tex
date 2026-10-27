@@ -1,0 +1,77 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=1.65cm]{geometry}
+\usepackage{booktabs,tabularx,array,xcolor,hyperref,enumitem}
+\definecolor{azul}{HTML}{16324F}
+\definecolor{azul2}{HTML}{245B7A}
+\hypersetup{colorlinks=true,urlcolor=azul2,linkcolor=azul2}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\newcommand{\metrica}[1]{\textbf{#1}}
+\title{\vspace{-1.2cm}\color{azul}\textbf{MLOps -- Defiende el servidor}}
+\author{Visualización 2 de 2-4\\Suleily Estefania Moreno Contreras\\Tomás Alejandro González Forero}
+\date{27 de octubre de 2026}
+\begin{document}
+\maketitle\vspace{-8pt}
+\section*{Resumen}
+Este proyecto construye un flujo reproducible para clasificar conexiones de red como normales ($label=0$) o ataques ($label=1$) con UNSW-NB15. Se auditaron los datos, se evitó fuga entre entrenamiento y validación, se compararon cuatro configuraciones en MLflow, se congeló una versión final, se publicó en Hugging Face y se evaluó una vez sobre el test completo.
+
+\section{Datos y preparación}
+Se usaron las particiones publicadas de entrenamiento (175.341 filas) y test (82.332 filas), ambas con 45 columnas y sin valores faltantes. La fuente de atribución es UNSW-NB15; la descarga reproducible proviene de un mirror fijado a commit. Los SHA-256 y la procedencia están en `evidencias/auditoria.json`.
+
+El objetivo es `label`; se excluyeron `id`, `label` y `attack\_cat` de las entradas. `id` se conserva para trazabilidad. Las variables categóricas (`proto`, `service`, `state`) se codifican con `OneHotEncoder(handle\_unknown=ignore)` y las numéricas se escalan con `StandardScaler`, dentro del pipeline ajustado solo con entrenamiento.
+
+La partición usa `GroupShuffleSplit`, semilla 42 y 20\% de grupos de validación. Cada grupo es el hash exacto del vector de predictores; así, los predictores idénticos no cruzan de train a validation. El resultado fue 140.145 filas de entrenamiento y 35.196 de validación, con cero grupos compartidos. Se conservaron filas con etiquetas contradictorias dentro del mismo grupo. El test se auditó sin usar sus métricas para seleccionar modelo.
+
+\section{Experimentos}
+Las cuatro configuraciones usan las mismas particiones, semilla, pipeline y umbral 0,5. Ataque es la clase positiva; los denominadores cero se resuelven con valor 0.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{lrrrr}
+\toprule
+Modelo & Recall & Precision & FPR & Macro-F1\\
+\midrule
+Logística $C=0,1$ & 0,9885 & 0,9210 & 0,1834 & 0,9202\\
+Logística $C=1$ & 0,9870 & 0,9244 & 0,1748 & 0,9226\\
+Árbol, profundidad 12 & 0,9714 & 0,9519 & 0,1062 & 0,9378\\
+Bosque, 100 árboles & 0,9827 & 0,9471 & 0,1189 & 0,9415\\
+\bottomrule
+\end{tabularx}\end{center}
+
+Los cuatro run ID y matrices de confusión están en `evidencias/experimentos.csv` y `evidencias/mlflow/`. El bosque aleatorio obtiene el mayor Macro-F1 y una precisión alta; el árbol tiene el menor FPR, pero menor recall y Macro-F1.
+
+\section{v1, v2 y decisión}
+v1 es la regresión logística $C=1$, umbral 0,5, commit `0b3cd416...`, run `d5c932d1de7342a59fb754c384d9295d`. v2 cambia de familia al bosque aleatorio de 100 árboles, profundidad 20 y mínimo 10 observaciones por hoja; commit `6428eb9...`, run `423880e8c50744af8f47f60a5736a423`.
+
+La decisión se tomó solo con validación y quedó congelada antes del test: v2 mejora Macro-F1 de 0,9226 a 0,9415, precision y FPR frente a v1, a cambio de una reducción pequeña del recall (0,9870 a 0,9827). El umbral se mantuvo en 0,5 para ambos.
+
+\section{Evaluación final}
+v2 se evaluó una sola vez sobre las 82.332 filas del test. `score\_attack` es la probabilidad de la clase 1 y `y\_pred=1` cuando score $\geq 0,5$.
+
+\begin{center}\small
+\begin{tabular}{lr}
+\toprule
+Recall de ataque & 0,9921\\
+Precision de ataque & 0,7959\\
+FPR & 0,3118\\
+Macro-F1 & 0,8470\\
+Matriz [0,1] & $[[25464,11536],[357,44975]]$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+El recall alto indica buena detección de ataques, pero el FPR aumenta respecto a validación. Además, 8.541 filas de test (10,37\%) comparten vector de predictores con entrenamiento. Esto, junto con el carácter histórico del dataset, limita la generalización a tráfico actual.
+
+\section{Reproducibilidad, limitaciones y entrega}
+v1 y v2 se descargaron por SHA completo desde Hugging Face y se probaron sobre 20 filas fijas de validation: las etiquetas coincidieron; la diferencia máxima de score fue 0 para v1 y $4,44\times10^{-16}$ para v2. La evidencia está en `evidencias/recuperacion/`.
+
+El remote DVC operativo es local (`/home/suleily/dvc-storage`); Google Drive no aceptó la cuenta de servicio en ``Mi unidad'' por falta de cuota. Por tanto, falta sustituirlo por un remote compartido autorizado y repetir la recuperación desde ese almacenamiento. También deben confirmarse permisos de lectura del docente y enviar un único mensaje por el canal del curso.
+
+El código, evidencias, ZIP e instrucciones están en el repositorio de GitHub: \url{https://github.com/tomas-gonzalez2006/defiende-el-servidor-mlops}. Los modelos están en \url{https://huggingface.co/suliely/defiende-el-servidor-modelos}. El uso de IA y las contribuciones están declarados en `entrega.md`.
+
+\section*{Referencias}
+UNSW-NB15: \url{https://research.unsw.edu.au/projects/unsw-nb15-dataset}. Evidencias principales: `auditoria.json`, `experimentos.csv`, `seleccion.json`, `metricas-test.json` y `predicciones-test.csv`.
+\end{document}

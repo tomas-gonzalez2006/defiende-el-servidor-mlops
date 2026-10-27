@@ -60,6 +60,8 @@ python scripts/evaluar_test.py
 ```
 
 La prueba de recuperación usa 20 filas fijas y está en `evidencias/recuperacion/`.
+El informe está disponible como `informe_mlop_defiende_servidor.pdf` y como
+fuente LaTeX en `informe_mlop_defiende_servidor.tex`.
 
 ## Recursos y limitaciones
 
@@ -75,3 +77,9 @@ de comandos y documentación. El grupo verificó localmente hashes, filas,
 métricas, artefactos, recuperación y publicaciones. Suleily Estefania Moreno
 Contreras y Tomás Alejandro González Forero realizaron conjuntamente la
 preparación, evaluación y documentación del proyecto.
+
+## Estado antes del envío
+
+La revisión detallada está en `revision_estado.md`. Sigue pendiente un remote
+DVC compartido con acceso para el docente y la confirmación de permisos de
+lectura antes de enviar la entrega.
