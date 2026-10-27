@@ -375,7 +375,7 @@
     "note": "Descriptive audit only. Test labels were not used for modeling or selection."
   },
   "provenance": {
-    "download_date": "2026-10-26",
+    "download_date": "2026-10-27",
     "official_attribution_source": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
     "download_source": "Third-party mirror pinned to commit 44bbd02b9e70f74dd915218d5eb702f125341ffc",
     "mirror_hashes_are_not_authentication_of_the_official_source": true

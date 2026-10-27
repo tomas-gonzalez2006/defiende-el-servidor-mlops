@@ -1,0 +1,35 @@
+{
+  "run_id": "91f3e594babf49f1b732bb3bbb4a3839",
+  "model": "decision_tree_depth_12",
+  "family": "decision_tree",
+  "hypothesis": "Un árbol de profundidad limitada puede capturar interacciones no lineales con una complejidad controlada.",
+  "parameters": {
+    "max_depth": 12,
+    "min_samples_leaf": 20
+  },
+  "positive_class": 1,
+  "threshold_rule": "predict attack if P(label=1) >= 0.5",
+  "confusion_matrix_labels_0_1": [
+    [
+      9942,
+      1181
+    ],
+    [
+      688,
+      23385
+    ]
+  ],
+  "metrics": {
+    "attack_recall": 0.9714202633655963,
+    "attack_precision": 0.9519254253846781,
+    "false_positive_rate": 0.10617639126135035,
+    "macro_f1": 0.93782743097907,
+    "threshold": 0.5,
+    "validation_rows": 35196,
+    "confusion_tn": 9942,
+    "confusion_fp": 1181,
+    "confusion_fn": 688,
+    "confusion_tp": 23385
+  },
+  "denominator_policy": "Precision/recall/F1 use zero_division=0; FPR=0 when there are no negative validation examples."
+}

@@ -1,0 +1,37 @@
+{
+  "run_id": "423880e8c50744af8f47f60a5736a423",
+  "model": "random_forest_100",
+  "family": "random_forest",
+  "hypothesis": "Un ensamble de árboles puede reducir la varianza frente a un árbol individual.",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": 20,
+    "min_samples_leaf": 10,
+    "n_jobs": -1
+  },
+  "positive_class": 1,
+  "threshold_rule": "predict attack if P(label=1) >= 0.5",
+  "confusion_matrix_labels_0_1": [
+    [
+      9801,
+      1322
+    ],
+    [
+      417,
+      23656
+    ]
+  ],
+  "metrics": {
+    "attack_recall": 0.9826776886968803,
+    "attack_precision": 0.9470734246136601,
+    "false_positive_rate": 0.11885282747460217,
+    "macro_f1": 0.9415303815941589,
+    "threshold": 0.5,
+    "validation_rows": 35196,
+    "confusion_tn": 9801,
+    "confusion_fp": 1322,
+    "confusion_fn": 417,
+    "confusion_tp": 23656
+  },
+  "denominator_policy": "Precision/recall/F1 use zero_division=0; FPR=0 when there are no negative validation examples."
+}

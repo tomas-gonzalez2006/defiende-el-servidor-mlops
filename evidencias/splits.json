@@ -1,5 +1,5 @@
 {
-  "source_file": "data\\raw\\UNSW_NB15_training-set.csv",
+  "source_file": "data/raw/UNSW_NB15_training-set.csv",
   "source_sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
   "seed": 42,
   "method": "GroupShuffleSplit",
@@ -63,7 +63,7 @@
       "0": 44877,
       "1": 95268
     },
-    "csv_sha256": "ea7666a6d07d510e62f887f7c6df0f34e3c657dd81c8965274bd34fc8ee157d4"
+    "csv_sha256": "ccf081fecaf4b1840e9506ecd21616845d0ed76167fb2758672d489b9ebf43c1"
   },
   "validation": {
     "rows": 35196,
@@ -72,9 +72,9 @@
       "0": 11123,
       "1": 24073
     },
-    "csv_sha256": "7057393f52d154639f26b020d61b88ce6cd71462958cfe7e976d32d0c7960951"
+    "csv_sha256": "3d616f858aa9a3991838cbffb6d1fe3d404fe65d75f00846a8fc56f3e0ed61e0"
   },
-  "assignment_csv_sha256": "3dbaf46ddb057d6b0d8ee2007adb0ba4584a4f60ff25d7a3ec44d4f80a32f214",
+  "assignment_csv_sha256": "d7f7602106006dbb132c4f01701fe5afdf6a18892055c6295bcd26cebcfb4df5",
   "overlapping_predictor_groups": 0,
   "test_data_used": false
 }

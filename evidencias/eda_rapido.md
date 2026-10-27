@@ -1,6 +1,6 @@
 # EDA rápido — UNSW-NB15
 
-Fecha de auditoría: 2026-10-26.
+Fecha de auditoría: 2026-10-27.
 
 ## Integridad y esquema
 
@@ -61,18 +61,7 @@ La proporción de ataques difiere entre entrenamiento y test; consérvese como o
 
 Hay 8,541 de 82,332 filas de test (10.37%) cuyo vector de predictores aparece también en entrenamiento. El cotejo excluye `id`, `label` y `attack_cat`.
 
-Los grupos de predictores duplicados con etiquetas contradictorias se conservan
-con sus etiquetas originales y se mantienen juntos en el mismo split.
-
-## Split de entrenamiento y validación
-
-Se generó desde el archivo de entrenamiento con `GroupShuffleSplit`, semilla 42
-y objetivo de 20 % de grupos en validación. Se agruparon los mismos predictores
-(sin `id`, `label` ni `attack_cat`). El resultado es 140.145 filas de
-entrenamiento y 35.196 de validación; no hay grupos de predictores compartidos.
-La proporción de validación no es estratificada, para priorizar que ningún grupo
-duplicado cruce splits. El archivo de test no se usó para construir esta
-partición. Consulta `splits.json` para la asignación reproducible y las huellas.
+Los grupos de predictores duplicados con etiquetas contradictorias requieren una política documentada antes de crear entrenamiento/validación. No se eliminan ni se resuelven automáticamente en este EDA. Al crear la validación desde entrenamiento, mantén cada grupo de predictores en una sola partición.
 
 ## Resumen numérico de entrenamiento
 
@@ -123,8 +112,7 @@ Cuantiles de las variables numéricas (sin `id` ni `label`):
 ## Alcance y cautelas
 
 - El objetivo para el modelo es `label`; excluye `label`, `attack_cat` e `id` de las entradas. `attack_cat` revela la respuesta e `id` sirve solo para auditoría y trazabilidad.
-- Las transformaciones de preprocesamiento se ajustarán únicamente con el
-  entrenamiento de este split.
+- No se han creado aquí particiones de validación ni transformaciones.
 - El análisis del test se limita a auditoría descriptiva; sus etiquetas y métricas no deben guiar la elección del modelo o del umbral.
 - Fuente de atribución oficial: [UNSW-NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset). Descarga usada: mirror de terceros fijado en un commit; las huellas SHA-256 verifican la copia del mirror, no la autenticidad del origen oficial.
 

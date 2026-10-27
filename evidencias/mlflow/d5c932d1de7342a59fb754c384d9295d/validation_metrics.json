@@ -1,0 +1,36 @@
+{
+  "run_id": "d5c932d1de7342a59fb754c384d9295d",
+  "model": "logistic_regression_c_1",
+  "family": "logistic_regression",
+  "hypothesis": "Reducir la regularización respecto a C=0.1 puede mejorar el ajuste sin cambiar la familia del modelo.",
+  "parameters": {
+    "C": 1.0,
+    "max_iter": 300,
+    "solver": "liblinear"
+  },
+  "positive_class": 1,
+  "threshold_rule": "predict attack if P(label=1) >= 0.5",
+  "confusion_matrix_labels_0_1": [
+    [
+      9179,
+      1944
+    ],
+    [
+      312,
+      23761
+    ]
+  ],
+  "metrics": {
+    "attack_recall": 0.987039421758817,
+    "attack_precision": 0.9243726901381054,
+    "false_positive_rate": 0.17477299289759957,
+    "macro_f1": 0.9226192937371531,
+    "threshold": 0.5,
+    "validation_rows": 35196,
+    "confusion_tn": 9179,
+    "confusion_fp": 1944,
+    "confusion_fn": 312,
+    "confusion_tp": 23761
+  },
+  "denominator_policy": "Precision/recall/F1 use zero_division=0; FPR=0 when there are no negative validation examples."
+}
