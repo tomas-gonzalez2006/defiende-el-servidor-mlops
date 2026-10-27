@@ -1,0 +1,221 @@
+{
+  "dataset": {
+    "name": "UNSW-NB15",
+    "official_attribution_source": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+    "download_source": "Third-party mirror pinned to commit 44bbd02b9e70f74dd915218d5eb702f125341ffc",
+    "download_date": "2026-10-27",
+    "mirror_hashes_are_not_authentication_of_official_source": true,
+    "partitions": {
+      "training": {
+        "file": "UNSW_NB15_training-set.csv",
+        "rows": 175341,
+        "columns": 45,
+        "sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+        "sha256_matches_expected_mirror": true,
+        "bytes": 32293018,
+        "types": {
+          "int64": 30,
+          "float64": 11,
+          "object": 4
+        },
+        "missing_values_total": 0,
+        "label_counts": {
+          "0": {
+            "count": 56000,
+            "proportion": 0.3193776697977085
+          },
+          "1": {
+            "count": 119341,
+            "proportion": 0.6806223302022916
+          }
+        },
+        "attack_category_counts": {
+          "Normal": 56000,
+          "Generic": 40000,
+          "Exploits": 33393,
+          "Fuzzers": 18184,
+          "DoS": 12264,
+          "Reconnaissance": 10491,
+          "Analysis": 2000,
+          "Backdoor": 1746,
+          "Shellcode": 1133,
+          "Worms": 130
+        },
+        "exact_full_row_duplicates": 0,
+        "duplicate_predictor_rows_after_first": 74301,
+        "contradictory_predictor_groups": 229,
+        "rows_in_contradictory_predictor_groups": 458
+      },
+      "testing": {
+        "file": "UNSW_NB15_testing-set.csv",
+        "rows": 82332,
+        "columns": 45,
+        "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+        "sha256_matches_expected_mirror": true,
+        "bytes": 15380800,
+        "types": {
+          "int64": 30,
+          "float64": 11,
+          "object": 4
+        },
+        "missing_values_total": 0,
+        "label_counts": {
+          "0": {
+            "count": 37000,
+            "proportion": 0.44939999028324346
+          },
+          "1": {
+            "count": 45332,
+            "proportion": 0.5506000097167566
+          }
+        },
+        "attack_category_counts": {
+          "Normal": 37000,
+          "Generic": 18871,
+          "Exploits": 11132,
+          "Fuzzers": 6062,
+          "DoS": 4089,
+          "Reconnaissance": 3496,
+          "Analysis": 677,
+          "Backdoor": 583,
+          "Shellcode": 378,
+          "Worms": 44
+        },
+        "exact_full_row_duplicates": 0,
+        "duplicate_predictor_rows_after_first": 28386,
+        "contradictory_predictor_groups": 6,
+        "rows_in_contradictory_predictor_groups": 12
+      }
+    }
+  },
+  "target_and_features": {
+    "target": "label",
+    "positive_class": 1,
+    "class_meaning": {
+      "0": "normal",
+      "1": "attack"
+    },
+    "excluded_features": [
+      "attack_cat",
+      "id",
+      "label"
+    ],
+    "predictor_columns": [
+      "dur",
+      "proto",
+      "service",
+      "state",
+      "spkts",
+      "dpkts",
+      "sbytes",
+      "dbytes",
+      "rate",
+      "sttl",
+      "dttl",
+      "sload",
+      "dload",
+      "sloss",
+      "dloss",
+      "sinpkt",
+      "dinpkt",
+      "sjit",
+      "djit",
+      "swin",
+      "stcpb",
+      "dtcpb",
+      "dwin",
+      "tcprtt",
+      "synack",
+      "ackdat",
+      "smean",
+      "dmean",
+      "trans_depth",
+      "response_body_len",
+      "ct_srv_src",
+      "ct_state_ttl",
+      "ct_dst_ltm",
+      "ct_src_dport_ltm",
+      "ct_dst_sport_ltm",
+      "ct_dst_src_ltm",
+      "is_ftp_login",
+      "ct_ftp_cmd",
+      "ct_flw_http_mthd",
+      "ct_src_ltm",
+      "ct_srv_dst",
+      "is_sm_ips_ports"
+    ],
+    "preprocessing": "StandardScaler for numeric features and OneHotEncoder(handle_unknown=ignore) for categorical features, fitted inside each training pipeline only."
+  },
+  "duplicate_and_overlap_policy": {
+    "duplicate_group_definition": "Exact predictor-row hash excluding id, label and attack_cat.",
+    "contradictory_labels": "Retain source rows and labels; keep identical-predictor rows in the same train or validation split.",
+    "training_test_predictor_overlap": {
+      "method": "pandas row hashes over predictors; excludes id, label, attack_cat",
+      "test_rows_matching_a_training_predictor_row": 8541,
+      "test_rows": 82332,
+      "test_overlap_proportion": 0.10373852208132925,
+      "distinct_training_predictor_rows": 101040,
+      "distinct_testing_predictor_rows": 53946,
+      "note": "Descriptive audit only. Test labels were not used for modeling or selection."
+    },
+    "test_labels_used_for_selection": false
+  },
+  "split": {
+    "method": "GroupShuffleSplit",
+    "seed": 42,
+    "validation_fraction_requested": 0.2,
+    "source_sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+    "train": {
+      "rows": 140145,
+      "groups": 80832,
+      "label_counts": {
+        "0": 44877,
+        "1": 95268
+      },
+      "csv_sha256": "ccf081fecaf4b1840e9506ecd21616845d0ed76167fb2758672d489b9ebf43c1"
+    },
+    "validation": {
+      "rows": 35196,
+      "groups": 20208,
+      "label_counts": {
+        "0": 11123,
+        "1": 24073
+      },
+      "csv_sha256": "3d616f858aa9a3991838cbffb6d1fe3d404fe65d75f00846a8fc56f3e0ed61e0"
+    },
+    "assignment_csv_sha256": "d7f7602106006dbb132c4f01701fe5afdf6a18892055c6295bcd26cebcfb4df5",
+    "overlapping_predictor_groups": 0,
+    "test_data_used": false
+  },
+  "test_evaluation": {
+    "model_version": "v2",
+    "model_sha256": "ae10f2c351b3740b5c0ab8a43380f666b93eef4e4ce66b060e82e38a26f8665f",
+    "dataset_sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+    "rows": 82332,
+    "threshold": 0.5,
+    "metrics": {
+      "attack_recall": 0.9921247683755404,
+      "attack_precision": 0.7958627523844916,
+      "false_positive_rate": 0.3117837837837838,
+      "macro_f1": 0.8469532699452136
+    },
+    "confusion_matrix_labels_0_1": [
+      [
+        25464,
+        11536
+      ],
+      [
+        357,
+        44975
+      ]
+    ],
+    "test_used_for_model_selection": false
+  },
+  "transformation_summary": [
+    "Downloaded only the published training and testing CSV partitions.",
+    "Validated SHA-256, row counts, schema, types and missing values.",
+    "Created train and validation only from the training CSV using GroupShuffleSplit with seed 42.",
+    "Stored raw and processed data under DVC; current default remote is local-storage and is not a shared remote.",
+    "Kept test data out of model selection and threshold selection."
+  ]
+}
